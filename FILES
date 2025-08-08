@@ -1,0 +1,772 @@
+\`\`\`tsx
+import Link from "next/link"
+import { useState } from "react"
+import { Phone, Menu, ShoppingCart } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import CartDrawer from "@/components/store/cart-drawer"
+import Container from "@/components/container"
+
+const PHONE_TEL = "+4372466669"
+
+export default function SiteHeader() {
+  const [openCart, setOpenCart] = useState(false)
+
+  return (
+    <>
+      <header className="sticky top-0 z-40 border-b border-white/40 bg-white/70 backdrop-blur-md supports-[backdrop-filter]:bg-white/50 shadow-sm">
+        <Container className="h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <img src="/images/logo-clean.jpg" alt="Aries logo" className="h-10 w-10 rounded-full border shadow-sm" />
+            <div className="leading-tight">
+              <p className="font-semibold tracking-tight">ARIES</p>
+              <p className="text-xs text-neutral-500">Home & Office Services Inc.</p>
+            </div>
+          </Link>
+
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            <Link href="/" className="text-neutral-700 hover:text-neutral-900">Home</Link>
+            <Link href="/about" className="text-neutral-700 hover:text-neutral-900">About Us</Link>
+            <Link href="/services" className="text-neutral-700 hover:text-neutral-900">Services</Link>
+            <Link href="/store" className="text-neutral-700 hover:text-neutral-900">Store</Link>
+            <Link href="/blog" className="text-neutral-700 hover:text-neutral-900">Blog</Link>
+            <Link href="/contact" className="text-neutral-700 hover:text-neutral-900">Contact Us</Link>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <Button variant="outline" className="hidden sm:inline-flex bg-transparent" asChild>
+              <a href={`tel:${PHONE_TEL}`}>Call</a>
+            </Button>
+            <Button
+              className="hidden sm:inline-flex bg-gradient-to-r from-[#002E5D] to-[#B11226] hover:opacity-90"
+              onClick={() => setOpenCart(true)}
+            >
+              <ShoppingCart className="h-4 w-4 mr-2" /> Cart
+            </Button>
+
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[360px]">
+                <SheetHeader>
+                  <SheetTitle className="flex items-center gap-3">
+                    <img src="/images/logo-clean.jpg" alt="Aries logo" className="h-8 w-8 rounded-full border" />
+                    <span>ARIES</span>
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="mt-6 grid gap-3 text-base">
+                  <Link href="/" className="text-neutral-800 hover:text-neutral-900">Home</Link>
+                  <Link href="/about" className="text-neutral-800 hover:text-neutral-900">About Us</Link>
+                  <Link href="/services" className="text-neutral-800 hover:text-neutral-900">Services</Link>
+                  <Link href="/store" className="text-neutral-800 hover:text-neutral-900">Store</Link>
+                  <Link href="/blog" className="text-neutral-800 hover:text-neutral-900">Blog</Link>
+                  <Link href="/faq" className="text-neutral-800 hover:text-neutral-900">FAQ</Link>
+                  <Link href="/testimonials" className="text-neutral-800 hover:text-neutral-900">Testimonials</Link>
+                  <Link href="/contact" className="text-neutral-800 hover:text-neutral-900">Contact Us</Link>
+                </div>
+                <div className="mt-6 grid gap-2">
+                  <Button asChild className="bg-gradient-to-r from-[#002E5D] to-[#B11226]">
+                    <a href="/#contact">Get a Free Quote</a>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <a href={`tel:${PHONE_TEL}`}>Call Now</a>
+                  </Button>
+                  <Button variant="secondary" onClick={() => setOpenCart(true)}><ShoppingCart className="h-4 w-4 mr-2" /> View Cart</Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </Container>
+      </header>
+
+      {/* Sticky mobile call button */}
+      <a
+        href={`tel:${PHONE_TEL}`}
+        aria-label="Call Aries"
+        className="fixed sm:hidden bottom-4 right-4 z-50 h-14 w-14 rounded-full grid place-items-center shadow-xl border bg-gradient-to-br from-[#002E5D] to-[#B11226] text-white"
+      >
+        <Phone className="h-6 w-6" />
+      </a>
+
+      <CartDrawer open={openCart} onOpenChange={setOpenCart} />
+    </>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import Link from "next/link"
+import Container from "@/components/container"
+
+export default function SiteFooter() {
+  return (
+    <footer className="border-t bg-white">
+      <Container className="py-12">
+        <div className="grid gap-8 md:grid-cols-4">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <img src="/images/logo-clean.jpg" alt="Aries logo" className="h-10 w-10 rounded-full border shadow-sm" />
+              <div>
+                <p className="font-semibold">ARIES Home & Office Services Inc.</p>
+                <p className="text-sm text-neutral-600">Trusted Hands. Clean Spaces. Peace of Mind.</p>
+              </div>
+            </div>
+            <p className="text-sm text-neutral-600">Serving Toronto & the Greater Toronto Area</p>
+          </div>
+          <div>
+            <h4 className="font-semibold">Company</h4>
+            <ul className="mt-3 space-y-2 text-sm text-neutral-700">
+              <li><Link href="/about" className="hover:underline">About Us</Link></li>
+              <li><Link href="/testimonials" className="hover:underline">Testimonials</Link></li>
+              <li><Link href="/blog" className="hover:underline">Blog</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold">Services</h4>
+            <ul className="mt-3 space-y-2 text-sm text-neutral-700">
+              <li><Link href="/services" className="hover:underline">All Services</Link></li>
+              <li><Link href="/services/residential-cleaning" className="hover:underline">Residential Cleaning</Link></li>
+              <li><Link href="/services/commercial-cleaning" className="hover:underline">Commercial Cleaning</Link></li>
+              <li><Link href="/services/moving-services" className="hover:underline">Moving</Link></li>
+              <li><Link href="/services/assembly-handyman" className="hover:underline">Assembly & Handyman</Link></li>
+              <li><Link href="/services/auto-detailing" className="hover:underline">Auto Detailing</Link></li>
+              <li><Link href="/services/airbnb-property-management" className="hover:underline">Airbnb Management</Link></li>
+              <li><Link href="/services/housekeeping-services" className="hover:underline">Housekeeping</Link></li>
+              <li><Link href="/services/smart-automation-solutions" className="hover:underline">Smart Automation</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold">Support</h4>
+            <ul className="mt-3 space-y-2 text-sm text-neutral-700">
+              <li><Link href="/faq" className="hover:underline">FAQ</Link></li>
+              <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
+              <li><Link href="/store" className="hover:underline">Online Store</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="mt-10 text-center text-sm text-neutral-600">
+          © {new Date().getFullYear()} Aries Home & Office Services Inc. All rights reserved.
+        </div>
+      </Container>
+    </footer>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+// components/contact-form.tsx
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+
+export default function ContactForm() {
+  return (
+    <Card className="border-neutral-200 bg-white/80 backdrop-blur-md shadow-lg">
+      <CardContent className="grid gap-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" placeholder="Your name" required />
+          </div>
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input type="email" id="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div>
+          <Label htmlFor="subject">Subject</Label>
+          <Input id="subject" placeholder="Subject" />
+        </div>
+        <div>
+          <Label htmlFor="message">Message</Label>
+          <Textarea id="message" placeholder="Tell us what you need..." rows={4} required />
+        </div>
+        <Button className="bg-gradient-to-r from-[#002E5D] to-[#B11226]">Submit</Button>
+      </CardContent>
+    </Card>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import { Check, Sparkles } from 'lucide-react'
+import { Card, CardContent } from "@/components/ui/card"
+import ContactForm from "@/components/contact-form"
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import FAQ from "@/components/faq"
+import Testimonials from "@/components/testimonials"
+import Link from "next/link"
+import { services } from "@/lib/services"
+import Container from "@/components/container"
+
+export default function HomePage() {
+  return (
+    <main id="top" className="min-h-screen text-neutral-800">
+      <SiteHeader />
+
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_50%_-10%,rgba(0,46,93,0.12),rgba(255,255,255,0))]" />
+        <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-gradient-to-br from-[#002E5D] to-[#B11226] -z-10" />
+        <Container className="py-14 md:py-24">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div className="bg-white/70 backdrop-blur-md border rounded-2xl shadow-xl p-6 md:p-8 text-center lg:text-left">
+              <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium text-neutral-700 bg-white/80 shadow-sm">
+                <Sparkles className="h-3.5 w-3.5 text-[#B11226]" />
+                Every Service. One Company. Zero Stress.
+              </span>
+              <h1 className="mt-5 text-4xl md:text-5xl/tight font-semibold tracking-tight text-neutral-900">
+                {"Trusted Hands. Clean Spaces. Peace of Mind."}
+              </h1>
+              <p className="mt-4 text-neutral-600">
+                Family-owned, full-service experts for homes and businesses across the GTA—cleaning, moving, handyman, auto detailing, Airbnb management, housekeeping, and smart automation.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <Link href="/contact" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-white bg-gradient-to-r from-[#002E5D] to-[#B11226] hover:opacity-90 shadow-md">
+                  Get a Free Quote
+                </Link>
+                <Link href="/services" className="inline-flex items-center justify-center rounded-md px-6 py-3 border bg-white/70 backdrop-blur-md shadow-sm">
+                  Explore Services
+                </Link>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-sm text-neutral-700">
+                <span className="inline-flex items-center gap-1">
+                  <Check className="h-4 w-4 text-[#B11226]" />
+                  Licensed & Insured
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Check className="h-4 w-4 text-[#B11226]" />
+                  Transparent Pricing
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Check className="h-4 w-4 text-[#B11226]" />
+                  Background-Checked Staff
+                </span>
+              </div>
+            </div>
+            <div className="relative">
+              <Card className="overflow-hidden border-neutral-200 shadow-xl">
+                <CardContent className="p-0">
+                  <img
+                    src="/images/heros.jpg"
+                    alt="Commercial building with professional cleaners"
+                    className="w-full h-[300px] sm:h-[360px] md:h-[420px] object-cover"
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Core Services */}
+      <section id="services" className="py-14 md:py-20 bg-neutral-50" aria-labelledby="services-title">
+        <Container>
+          <div className="text-center">
+            <h2 id="services-title" className="text-3xl font-semibold tracking-tight text-neutral-900">Core Services</h2>
+            <p className="mt-2 text-neutral-600">Residential and commercial solutions, tailored to you.</p>
+            <div className="mt-4">
+              <Link href="/services" className="inline-flex items-center rounded-md border px-4 py-2 bg-white/80 backdrop-blur-md shadow-sm">
+                View All
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s) => (
+              <Link key={s.slug} href={`/services/${s.slug}`} className="group">
+                <Card className="overflow-hidden h-full shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="relative">
+                    <img src={s.image || "/placeholder.svg"} alt={s.title} className="h-44 w-full object-cover transition-all duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
+                  </div>
+                  <CardContent className="p-5">
+                    <h3 className="text-lg font-semibold">{s.title}</h3>
+                    <p className="mt-1 text-sm text-neutral-600">{s.summary}</p>
+                    {s.subServices && (
+                      <ul className="mt-3 text-sm text-neutral-700 grid gap-1">
+                        {s.subServices.slice(0,3).map((sub) => (
+                          <li key={sub} className="inline-flex items-center gap-2">
+                            <Check className="h-4 w-4 text-[#B11226]" /> {sub}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Quote + Contact */}
+      <section id="contact" className="py-14 md:py-20" aria-labelledby="contact-title">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="text-center lg:text-left">
+              <h2 id="contact-title" className="text-3xl font-semibold tracking-tight text-neutral-900">Contact Us / Request a Quote</h2>
+              <p className="mt-2 text-neutral-600">
+                Tell us what you need—cleaning, moving, handyman, auto detailing, Airbnb management, housekeeping, or automation—and we’ll tailor a plan for you.
+              </p>
+              <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
+                <Stat label="Avg. Response" value="< 1 hour" />
+                <Stat label="Customer Rating" value="4.9/5" />
+              </div>
+            </div>
+            <ContactForm />
+          </div>
+        </Container>
+      </section>
+
+      <FAQ />
+      <Testimonials />
+      <SiteFooter />
+    </main>
+  )
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border bg-white/80 backdrop-blur-md p-4 shadow-md">
+      <p className="text-xs uppercase tracking-wide text-neutral-500">{label}</p>
+      <p className="mt-1 text-xl font-semibold text-neutral-900">{value}</p>
+    </div>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import { services } from "@/lib/services"
+import { Check } from 'lucide-react'
+import Container from "@/components/container"
+
+export default function ServicesPage() {
+  return (
+    <main className="min-h-screen text-neutral-800">
+      <SiteHeader />
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="text-center">
+            <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">Our Services</h1>
+            <p className="mt-2 text-neutral-600">Choose a service to learn more or request a custom plan tailored to your property.</p>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s) => (
+              <Card key={s.slug} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <img src={s.image || "/placeholder.svg"} alt={s.title} className="h-44 w-full object-cover" />
+                <CardContent className="p-5">
+                  <h2 className="text-lg font-semibold">{s.title}</h2>
+                  <p className="text-sm text-neutral-600 mt-1">{s.summary}</p>
+                  <ul className="mt-3 grid gap-1 text-sm text-neutral-700">
+                    {s.subServices?.map((sub) => (
+                      <li key={sub} className="inline-flex items-center gap-2">
+                        <Check className="h-4 w-4 text-[#B11226]" /> {sub}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4">
+                    <Link href={`/services/${s.slug}`} className="inline-flex items-center rounded-md px-4 py-2 text-white bg-gradient-to-r from-[#002E5D] to-[#B11226] hover:opacity-90 shadow">
+                      Learn More
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+      <SiteFooter />
+    </main>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import { notFound } from "next/navigation"
+import { getService } from "@/lib/services"
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import { Check } from 'lucide-react'
+import Link from "next/link"
+import Container from "@/components/container"
+
+export default function ServiceDetail({ params }: { params: { slug: string } }) {
+  const service = getService(params.slug)
+  if (!service) return notFound()
+
+  return (
+    <main className="min-h-screen text-neutral-800">
+      <SiteHeader />
+      <section className="bg-white">
+        <Container className="py-10 md:py-14">
+          <div className="grid gap-8 md:grid-cols-2 md:items-start">
+            <div className="text-center md:text-left">
+              <h1 className="text-3xl md:text-4xl/tight font-semibold tracking-tight text-neutral-900">{service.title}</h1>
+              <p className="mt-3 text-neutral-700">{service.summary}</p>
+              <ul className="mt-6 grid gap-2 text-neutral-800">
+                {service.features.map((f) => (
+                  <li key={f} className="inline-flex items-start gap-2">
+                    <Check className="h-5 w-5 mt-0.5 text-[#B11226]" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              {service.subServices && (
+                <>
+                  <h2 className="mt-6 font-semibold">Includes</h2>
+                  <ul className="mt-2 grid gap-1 text-neutral-700">
+                    {service.subServices.map((s) => (
+                      <li key={s} className="inline-flex items-center gap-2">
+                        <Check className="h-4 w-4 text-[#B11226]" /> {s}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <div className="mt-6 flex gap-3 justify-center md:justify-start">
+                <Link href="/contact" className="inline-flex items-center rounded-md px-5 py-2.5 text-white bg-gradient-to-r from-[#002E5D] to-[#B11226] hover:opacity-90 shadow">
+                  Get a Quote
+                </Link>
+                <a href="tel:+4372466669" className="inline-flex items-center rounded-md px-5 py-2.5 border bg-white/70 backdrop-blur-md shadow-sm">Call Now</a>
+              </div>
+            </div>
+            <div>
+              <img src={service.image || "/placeholder.svg"} alt={service.title} className="w-full h-[260px] sm:h-[360px] object-cover rounded-xl border shadow-lg" />
+            </div>
+          </div>
+          <div className="mt-10 text-center md:text-left">
+            <Link href="/services" className="hover:underline">← Back to Services</Link>
+          </div>
+        </Container>
+      </section>
+      <SiteFooter />
+    </main>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import Testimonials from "@/components/testimonials"
+import { Check } from 'lucide-react'
+import Container from "@/components/container"
+
+export default function AboutPage() {
+  return (
+    <main className="min-h-screen text-neutral-800">
+      <SiteHeader />
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="text-center">
+            <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">About Aries</h1>
+            <p className="mt-3 text-neutral-700 mx-auto max-w-3xl">
+              Aries Home and Office Services Inc. is your trusted, family-owned, one‑stop solution for residential and commercial property care across the GTA.
+              We deliver customized, reliable solutions with unmatched attention to detail and care you can trust.
+            </p>
+          </div>
+          <ul className="mt-8 grid gap-2 text-neutral-800 max-w-3xl mx-auto">
+            {[
+              "Local, family-owned and insured",
+              "Trained, background-checked staff",
+              "Transparent pricing and clear checklists",
+              "Flexible scheduling and responsive support",
+            ].map((f) => (
+              <li key={f} className="inline-flex items-start gap-2">
+                <Check className="h-5 w-5 mt-0.5 text-[#B11226]" />
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+      <Testimonials />
+      <SiteFooter />
+    </main>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import ContactForm from "@/components/contact-form"
+import { Mail, MapPin, Phone } from 'lucide-react'
+import Container from "@/components/container"
+
+export default function ContactPage() {
+  return (
+    <main className="min-h-screen text-neutral-800">
+      <SiteHeader />
+      <section className="py-14 md:py-20 bg-neutral-50" aria-labelledby="contact-title">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="text-center lg:text-left">
+              <h1 id="contact-title" className="text-4xl font-semibold tracking-tight text-neutral-900">Contact Us</h1>
+              <p className="mt-2 text-neutral-600">
+                Tell us what you need—cleaning, moving, handyman, auto detailing, Airbnb management, housekeeping, or automation—and we’ll tailor a plan for you.
+              </p>
+              <div className="mt-6 space-y-3 text-neutral-700">
+                <p className="inline-flex items-center gap-2 justify-center lg:justify-start"><Phone className="h-5 w-5 text-[#B11226]" /><a className="hover:underline" href="tel:+4372466669">+43 7246 6669</a></p>
+                <p className="inline-flex items-center gap-2 justify-center lg:justify-start"><Mail className="h-5 w-5 text-[#B11226]" /><a className="hover:underline" href="mailto:arieshomeservice@gmail.com">arieshomeservice@gmail.com</a></p>
+                <p className="inline-flex items-center gap-2 justify-center lg:justify-start"><MapPin className="h-5 w-5 text-[#B11226]" />Toronto & the Greater Toronto Area</p>
+              </div>
+            </div>
+            <ContactForm />
+          </div>
+        </Container>
+      </section>
+      <SiteFooter />
+    </main>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+"use client"
+
+import Image from "next/image"
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import { Card, CardContent } from "@/components/ui/card"
+import AddToCartButton from "@/components/store/add-to-cart-button"
+import Container from "@/components/container"
+
+const products = [
+  { id: "clean-01", name: "All-Purpose Cleaner (1L)", price: 9.99, image: "/images/online-store.jpg" },
+  { id: "move-01", name: "Moving Boxes (Pack of 10)", price: 24.99, image: "/images/online-store.jpg" },
+  { id: "detail-01", name: "Microfiber Cloth Set (6)", price: 12.99, image: "/images/online-store.jpg" },
+  { id: "gloves-01", name: "Nitrile Gloves (100)", price: 14.99, image: "/images/online-store.jpg" },
+]
+
+export default function StorePage() {
+  return (
+    <main className="min-h-screen text-neutral-800">
+      <SiteHeader />
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="text-center">
+            <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">Online Store</h1>
+            <p className="mt-2 text-neutral-600">Cleaning supplies and property essentials. Fast local delivery available.</p>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {products.map((p) => (
+              <Card key={p.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <Image src={p.image || "/placeholder.svg"} alt={p.name} width={600} height={400} className="h-44 w-full object-cover" />
+                <CardContent className="p-5">
+                  <h2 className="font-semibold">{p.name}</h2>
+                  <p className="mt-1 text-neutral-700">${p.price.toFixed(2)}</p>
+                  <div className="mt-3">
+                    <AddToCartButton id={p.id} name={p.name} price={p.price} image={p.image} />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+      <SiteFooter />
+    </main>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Clock, CornerDownRight, Sparkles } from 'lucide-react'
+import { posts, formatDate } from "@/lib/posts"
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import Container from "@/components/container"
+
+export default function BlogIndexPage() {
+  return (
+    <main className="min-h-screen">
+      <SiteHeader />
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_50%_-10%,rgba(14,28,56,0.12),rgba(255,255,255,0))]" />
+        <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-gradient-to-br from-[#002E5D] to-[#B11226] -z-10" />
+        <Container className="py-14 md:py-20">
+          <div className="flex flex-col items-center text-center gap-4">
+            <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium text-neutral-600 bg-white/80 backdrop-blur-md shadow-sm">
+              <Sparkles className="h-3.5 w-3.5 text-[#B11226]" />
+              Property care insights for GTA homes & businesses
+            </span>
+            <h1 className="text-4xl md:text-5xl/tight font-semibold tracking-tight text-neutral-900">Aries Blog</h1>
+            <p className="text-neutral-600 max-w-2xl">
+              Expert tips on cleaning, moving, handyman fixes, auto detailing, Airbnb hosting, and smart home automation.
+            </p>
+            <div className="mt-2">
+              <Button asChild variant="outline">
+                <Link href="/#contact">
+                  <CornerDownRight className="h-4 w-4 mr-2" />
+                  Get a Free Quote
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="pb-16 md:pb-24 bg-white">
+        <Container>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <article key={post.slug}>
+                <Card className="overflow-hidden group h-full shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="relative">
+                    <img
+                      src={post.image || "/placeholder.svg"}
+                      alt={`${post.title} hero image`}
+                      className="h-44 w-full object-cover transition-all duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute left-3 top-3 flex gap-2">
+                      <Badge className="bg-white/90 text-neutral-800 border backdrop-blur">{post.category}</Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-5">
+                    <div className="text-xs text-neutral-500 flex items-center gap-3">
+                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                      <span className="text-neutral-300">{'•'}</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="h-3.5 w-3.5 text-[#B11226]" />
+                        {post.readMin} min read
+                      </span>
+                    </div>
+                    <h2 className="mt-2 text-lg font-semibold leading-snug">
+                      <Link href={`/blog/${post.slug}`} className="hover:underline">
+                        {post.title}
+                      </Link>
+                    </h2>
+                    <p className="mt-2 text-sm text-neutral-600">{post.excerpt}</p>
+                    <div className="mt-4">
+                      <Button asChild size="sm" variant="secondary">
+                        <Link href={`/blog/${post.slug}`}>Read more</Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+      <SiteFooter />
+    </main>
+  )
+}
+\`\`\`
+
+\`\`\`tsx
+import Link from "next/link"
+import { notFound } from "next/navigation"
+import { posts, getPostBySlug, formatDate } from "@/lib/posts"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Clock, CornerDownLeft } from 'lucide-react'
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import Container from "@/components/container"
+
+type Params = { slug: string }
+
+export default function BlogPostPage({ params }: { params: Params }) {
+  const post = getPostBySlug(params.slug)
+  if (!post) return notFound()
+
+  const paragraphs = post.content.split(/\n{2,}/g)
+
+  return (
+    <main className="min-h-screen">
+      <SiteHeader />
+      <section className="bg-white">
+        <Container className="py-10 md:py-14">
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            <Badge variant="secondary">{post.category}</Badge>
+            <span className="text-neutral-300">{'•'}</span>
+            <time className="text-neutral-600" dateTime={post.date}>{formatDate(post.date)}</time>
+            <span className="text-neutral-300">{'•'}</span>
+            <span className="inline-flex items-center gap-1 text-neutral-600">
+              <Clock className="h-4 w-4 text-[#B11226]" />
+              {post.readMin} min read
+            </span>
+          </div>
+          <h1 className="mt-4 text-3xl md:text-4xl/tight font-semibold tracking-tight text-neutral-900">
+            {post.title}
+          </h1>
+          <div className="mt-6">
+            <img
+              src={post.image || "/placeholder.svg"}
+              alt={`${post.title} cover image`}
+              className="w-full h-[220px] sm:h-[320px] md:h-[420px] object-cover rounded-xl border shadow-lg"
+            />
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-10 md:py-14 bg-neutral-50">
+        <Container>
+          <div className="prose prose-neutral max-w-none">
+            {paragraphs.map((p, i) => (
+              <p key={i} className="text-neutral-800 leading-relaxed">{p}</p>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button asChild variant="outline">
+              <Link href="/blog">
+                <CornerDownLeft className="h-4 w-4 mr-2" />
+                Back to Blog
+              </Link>
+            </Button>
+            <Button asChild>
+              <Link href="/#contact">Get a Free Quote</Link>
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      <section className="pb-16 md:pb-24 bg-white">
+        <Container>
+          <h2 className="text-xl font-semibold text-neutral-900">You might also like</h2>
+          <div className="mt-4 grid gap-6 sm:grid-cols-2">
+            {posts
+              .filter(p => p.slug !== post.slug)
+              .slice(0, 2)
+              .map((rel) => (
+                <Link key={rel.slug} href={`/blog/${rel.slug}`} className="group">
+                  <div className="overflow-hidden rounded-lg border shadow-sm">
+                    <img
+                      src={rel.image || "/placeholder.svg"}
+                      alt={rel.title}
+                      className="h-36 w-full object-cover transition-all duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="mt-2 text-sm text-neutral-500">{formatDate(rel.date)} • {rel.category}</div>
+                  <div className="text-base font-semibold group-hover:underline">{rel.title}</div>
+                </Link>
+              ))}
+          </div>
+        </Container>
+      </section>
+      <SiteFooter />
+    </main>
+  )
+}

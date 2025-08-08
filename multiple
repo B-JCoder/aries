@@ -1,0 +1,121 @@
+import "./globals.css"
+import type { ReactNode } from "react"
+import { CartProvider } from "@/components/store/cart-provider"
+
+export const metadata = {
+  metadataBase: new URL("https://www.aries-home-services.example"), // replace on deploy
+  title: {
+    default: "ARIES Home & Office Services Inc.",
+    template: "%s | ARIES Home & Office Services Inc."
+  },
+  description: "Trusted Hands. Clean Spaces. Peace of Mind. Family-owned property services in Toronto & the GTA.",
+  keywords: [
+    "cleaning services GTA",
+    "moving services Toronto",
+    "handyman Toronto",
+    "auto detailing mobile",
+    "Airbnb property management",
+    "housekeeping",
+    "smart home installation"
+  ],
+  category: "home services",
+  openGraph: {
+    title: "ARIES Home & Office Services Inc.",
+    description: "Every Service. One Company. Zero Stress.",
+    url: "https://www.aries-home-services.example",
+    siteName: "ARIES Home & Office Services",
+    images: [{ url: "/images/logo-clean.jpg", width: 512, height: 512, alt: "ARIES Logo" }],
+    locale: "en_CA",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ARIES Home & Office Services Inc.",
+    description: "Trusted property care for homes and businesses across the GTA.",
+    images: ["/images/logo-clean.jpg"]
+  },
+  alternates: {
+    canonical: "https://www.aries-home-services.example"
+  },
+  icons: {
+    icon: "/images/logo-clean.jpg",
+    apple: "/images/logo-clean.jpg"
+  },
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#002E5D" }
+  ]
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen bg-white text-[#2B2B2B]">
+        <CartProvider>{children}</CartProvider>
+      </body>
+    </html>
+  )
+}
+
+:root {
+  --brand-navy: #002E5D;
+  --brand-crimson: #B11226;
+  --brand-white: #FFFFFF;
+  --brand-charcoal: #2B2B2B;
+}
+
+/* Glass surfaces */
+.glass-card {
+  position: relative;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: saturate(120%) blur(10px);
+  -webkit-backdrop-filter: saturate(120%) blur(10px);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow:
+    0 8px 24px rgba(0,46,93,0.10),
+    0 1px 0 rgba(255,255,255,0.7) inset;
+}
+
+/* Gradient glow under elements */
+.gradient-shadow-faint::after {
+  content: "";
+  position: absolute;
+  inset: -8px -8px -12px -8px;
+  z-index: -1;
+  background:
+    radial-gradient(60% 60% at 20% 0%, rgba(0,46,93,0.18), transparent 60%),
+    radial-gradient(60% 60% at 80% 100%, rgba(177,18,38,0.18), transparent 60%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+/* Hover lift */
+.hover-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 36px rgba(0,46,93,0.16),
+    0 6px 12px rgba(0,0,0,0.06);
+}
+
+/* Footer gradient shadow spanning the page */
+.footer-gradient {
+  position: relative;
+  overflow: hidden;
+}
+.footer-gradient::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 160px;
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(0,46,93,0.35), rgba(177,18,38,0.25) 60%, transparent 75%);
+  filter: blur(36px);
+  z-index: 0;
+  pointer-events: none;
+}
