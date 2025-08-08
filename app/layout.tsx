@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster"
 export const metadata = {
   title: "ARIES Home & Office Services Inc.",
   description: "Trusted Hands. Clean Spaces. Peace of Mind.",
-    generator: 'v0.dev'
+    
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
