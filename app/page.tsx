@@ -1,18 +1,39 @@
-import { BadgeCheck, Building2, Car, Check, HomeIcon, Mail, MapPin, Menu, Phone, ShieldCheck, ShoppingBag, Sparkles, Truck, Wrench } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import ContactForm from "@/components/contact-form"
-import SiteHeader from "@/components/site-header"
-import SiteFooter from "@/components/site-footer"
-import FAQ from "@/components/faq"
-import Testimonials from "@/components/testimonials"
-import Link from "next/link"
-import { services } from "@/lib/services"
+import {
+  BadgeCheck,
+  Building2,
+  Car,
+  Check,
+  HomeIcon,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  ShieldCheck,
+  ShoppingBag,
+  Sparkles,
+  Truck,
+  Wrench,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import ContactForm from "@/components/contact-form";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
+import FAQ from "@/components/faq";
+import Testimonials from "@/components/testimonials";
+import Link from "next/link";
+import { services } from "@/lib/services";
 
-const PHONE_DISPLAY = "+43 7246 6669"
-const PHONE_TEL = "+4372466669"
-const EMAIL = "arieshomeservice@gmail.com"
+const PHONE_DISPLAY = "+43 7246 6669";
+const PHONE_TEL = "+4372466669";
+const EMAIL = "arieshomeservice@gmail.com";
 
 export default function HomePage() {
   return (
@@ -20,7 +41,8 @@ export default function HomePage() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
+<section className="relative overflow-hidden -mt-12">
+
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_50%_-10%,rgba(0,46,93,0.12),rgba(255,255,255,0))]" />
         <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-gradient-to-br from-[#002E5D] to-[#B11226] -z-10" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28">
@@ -34,13 +56,21 @@ export default function HomePage() {
                 {"Trusted Hands. Clean Spaces. Peace of Mind."}
               </h1>
               <p className="mt-4 text-neutral-600 max-w-xl">
-                Family-owned, full-service experts for homes and businesses across the GTA—cleaning, moving, handyman, auto detailing, Airbnb management, housekeeping, and smart automation.
+                Family-owned, full-service experts for homes and businesses
+                across the GTA—cleaning, moving, handyman, auto detailing,
+                Airbnb management, housekeeping, and smart automation.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Link href="/contact" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-white bg-gradient-to-r from-[#002E5D] to-[#B11226] hover:opacity-90">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center rounded-md px-6 py-3 text-white bg-gradient-to-r from-[#002E5D] to-[#B11226] hover:opacity-90"
+                >
                   Get a Free Quote
                 </Link>
-                <a href="/services" className="inline-flex items-center justify-center rounded-md px-6 py-3 border">
+                <a
+                  href="/services"
+                  className="inline-flex items-center justify-center rounded-md px-6 py-3 border"
+                >
                   Explore Services
                 </a>
               </div>
@@ -60,14 +90,12 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative">
-              <Card className="overflow-hidden border-neutral-200 glass-card gradient-shadow-faint shadow-xl">
-                <CardContent className="p-0">
-                  <img
-                    src="/images/heros.jpg"
-                    alt="Commercial building with professional cleaners"
-                    className="w-full h-[320px] md:h-[420px] object-cover"
-                  />
-                </CardContent>
+              <Card className="border-neutral-200 glass-card gradient-shadow-faint shadow-xl p-0 ">
+                <img
+                  src="/images/heros.jpg"
+                  alt="Commercial building with professional cleaners"
+                  className="w-full h-[420px] md:h-[420px] object-cover block rounded-2xl glass-card"
+                />
               </Card>
             </div>
           </div>
@@ -75,14 +103,30 @@ export default function HomePage() {
       </section>
 
       {/* Core Services Overview */}
-      <section id="services" className="py-14 md:py-20 bg-neutral-50" aria-labelledby="services-title">
+      <section
+        id="services"
+        className="py-14 md:py-20 bg-neutral-50"
+        aria-labelledby="services-title"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <h2 id="services-title" className="text-3xl font-semibold tracking-tight text-neutral-900">Core Services</h2>
-              <p className="mt-2 text-neutral-600">Residential and commercial solutions, tailored to you.</p>
+              <h2
+                id="services-title"
+                className="text-3xl font-semibold tracking-tight text-neutral-900"
+              >
+                Core Services
+              </h2>
+              <p className="mt-2 text-neutral-600">
+                Residential and commercial solutions, tailored to you.
+              </p>
             </div>
-            <Link href="/services" className="hidden md:inline-flex items-center rounded-md border px-4 py-2">View All</Link>
+            <Link
+              href="/services"
+              className="hidden md:inline-flex items-center rounded-md border px-4 py-2"
+            >
+              View All
+            </Link>
           </div>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -90,7 +134,11 @@ export default function HomePage() {
               <Link key={s.slug} href={`/services/${s.slug}`} className="group">
                 <Card className="overflow-hidden h-full glass-card gradient-shadow-faint hover-lift">
                   <div className="relative">
-                    <img src={s.image || "/placeholder.svg"} alt={s.title} className="h-40 w-full object-cover transition-all duration-700 group-hover:scale-105" />
+                    <img
+                      src={s.image || "/placeholder.svg"}
+                      alt={s.title}
+                      className="h-40 w-full object-cover transition-all duration-700 group-hover:scale-105"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
                   </div>
                   <CardContent className="p-5">
@@ -98,8 +146,11 @@ export default function HomePage() {
                     <p className="mt-1 text-sm text-neutral-600">{s.summary}</p>
                     {s.subServices && (
                       <ul className="mt-3 text-sm text-neutral-700 grid gap-1">
-                        {s.subServices.slice(0,3).map((sub) => (
-                          <li key={sub} className="inline-flex items-center gap-2">
+                        {s.subServices.slice(0, 3).map((sub) => (
+                          <li
+                            key={sub}
+                            className="inline-flex items-center gap-2"
+                          >
                             <Check className="h-4 w-4 text-[#B11226]" /> {sub}
                           </li>
                         ))}
@@ -117,7 +168,7 @@ export default function HomePage() {
       <Testimonials />
       <SiteFooter />
     </main>
-  )
+  );
 }
 
 function ServiceCard({
@@ -127,11 +178,11 @@ function ServiceCard({
   imgQuery,
   comingSoon = false,
 }: {
-  icon: React.ReactNode
-  title: string
-  desc: string
-  imgQuery: string
-  comingSoon?: boolean
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  imgQuery: string;
+  comingSoon?: boolean;
 }) {
   return (
     <Card className="overflow-hidden group">
@@ -158,7 +209,7 @@ function ServiceCard({
         <p className="mt-2 text-sm text-neutral-600">{desc}</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function AboutCard({
@@ -166,9 +217,9 @@ function AboutCard({
   title,
   desc,
 }: {
-  icon: React.ReactNode
-  title: string
-  desc: string
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
 }) {
   return (
     <Card className="overflow-hidden border-neutral-200">
@@ -182,14 +233,16 @@ function AboutCard({
         <p className="mt-2 text-sm text-neutral-600">{desc}</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl border bg-white p-4">
-      <p className="text-xs uppercase tracking-wide text-neutral-500">{label}</p>
+      <p className="text-xs uppercase tracking-wide text-neutral-500">
+        {label}
+      </p>
       <p className="mt-1 text-xl font-semibold text-neutral-900">{value}</p>
     </div>
-  )
+  );
 }
